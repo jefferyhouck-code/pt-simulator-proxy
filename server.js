@@ -2,7 +2,14 @@ const express = require('express');
 const cors = require('cors');
 
 const app = express();
-app.use(cors());
+
+app.use(cors({
+  origin: '*',
+  methods: ['GET', 'POST', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+}));
+
+app.options('*', cors());
 app.use(express.json({ limit: '10mb' }));
 
 const API_KEY = process.env.ANTHROPIC_API_KEY;
